@@ -1,0 +1,71 @@
+SOCKET
+It is an IPC Mech.
+
+SOCKET();
+When we want to create a socket we need to keep 3 things in Mind (3 parameters)
+1.IPV4 or IPV6 family [AF_INET, AF_INET6]
+2.Type of Communication .. TCP/UDP. [SOCK_STREAM, SOCK_DGRAM]
+3.Extra Protocol for more security.
+
+EX :: sock_fd = socket(AF_INET , SOCK_STREAM , 0);
+
+  serv_addr.sin_family = AF_INET;          	          //man 7 ip AF_INET is ipv4
+  serv_addr.sin_addr.s_addr = inet_addr(SERVER_IP);       //man 7 ip
+  serv_addr.sin_port = htons(SERVER_PORT);               //man 7 ip      5000
+
+FIle descriptor is returned on Succes.	-1 on error.
+-----------------------------------------------------
+
+BIND();			PORT NUMBER + IP-Address	to the respective Socket
+This System call is used to bind PORT-NUMBER and IP-ADDRESS on the SERVER side , but automatically happens on the client side.
+
+Ex :: bind( sock_fd ,  (struct sockaddr*)&serv_addr , sizeof(serv_addr) );
+
+1st para :: sock_fd a socket is created.
+2nd para :: sturct where the IP-ADDR , PORT-NO , IPV4(Family) is Specfied.
+
+Now socket is BOUND with IP and PORT-NO.
+
+------------------------------------------------------
+LISTEN();
+Is used to set the limit for the SOCKET.
+EX :: listen(sock_fd, 10);
+i.e fixing the NO of request a SERVER can ACCEPT at the same time.
+
+-------------------------------------------------------
+ACCEPT();
+EX :: data_sock_fd = accept(sock_fd , (struct sockaddr*)NULL , NULL);
+1st  :: SOCKET.
+2nd  :: Specfies if there are any PEER-SOCKETS, so NULL (if not) 
+Accpets the Connections form the SOCKET.
+Returns a new file_descriptor. for the respective socket
+
+--------------------------------------------------------
+RECV();		data_sock_fd contains the packets (which are sent one after another).
+Done only after Accepting the connection ACCEPT()returns a file_desciptor [data_sock_fd] , which would be received.
+EX :: recv(data_sock_fd, (void *)serv_buffer , SERVER_BUFF , 0);
+1st :: fd (return value of accept(); )
+2nd :: ARRAY to receive and store the data.
+3rd :: size
+4th :: flags
+Received as a (VOID *)buf  and  stored in the ARRAY serv_buffer.
+
+----------------------------------------------------------------------------------------------------
+CLIENT SIDE.
+-----------------------------------------------------------------------------------------------------
+SEND();
+EX :: c_size = send(sock_fd , (void *)client_buffer ,CLIENT_BUFF_SIZE , 0);
+1st :: fd (to respective socket)
+2nd :: sending the ARRAY (whater data was written into array would be sent as void pointer.)
+3rd :: size
+4th :: flags
+send the data as (VOID *)buf .
+---------------------------------------------------------
+
+CONNECT();
+EX :: if(connect(sock_fd , (struct sockaddr *)&serv_addr ,sizeof(serv_addr)) != 0)
+connecting sock_fd to server with help of serv_addr.
+1st : Socket
+2nd : Server Address to which we want to connect.
+3rd : Size of the Server IP since we dont wether it is IPV4 or IPV6
+---------------------------------------------------------
