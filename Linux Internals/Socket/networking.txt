@@ -1,0 +1,54 @@
+Scokets:
+are used connect between 2 Processess in the Netowrking Field.
+Computer can act as a Process and the Server is also a Process.
+Socket is an end point of 2-way Communiction
+
+www.google.com	 How is it converted to IP address.??
+With help of DNS Domain name server.
+DNS is Nothing but a Phone book Stores the Names of the Domains and Converts it to IP ADDRESS. 
+
+How will www.google.com Communicate with DNS??
+With help of ISP INTERNET SERVICE PROVIDER.
+ISP Provides access to the Internet
+Ex:Airtel, Vodafone, JIO.
+
+How do we Block a Particular site in Network??
+Just Remove the name from the DNS, and it will be IMpossible to access that Particluar Website.
+
+Now that we got the IP ADDRESS from the DNS server How do we reach to that IP??
+That is done with help of Routers.
+
+Ex:: COnsider that a Process has to Communicate with the Server. It is only Possible with the help of ROUTERS.
+Each Router has has a IP Table. there will be N-no of routers, thought which it has to go and reach the Server.
+each Router will Provide the Direction towards the Particular IP.
+The Table consists of the INFOMATION OF To the direction to the Particular SERVER(IP-address)
+INTERNET :: It is collection of Routers.
+
+TCP/IP MODEL
+-----------------
+______Application Layer		:: This the palce where all the Applications Run (or placed) CHROME, PINBALL, TORRENTS
+Consider a Hello msg has to sent to Another Process in another PC.
+It has go through the Transport Layer.
+
+______Transport Layer	 	:: THis layer will attch the Sender and Receiver Ports to the msg "HELLO"
+like	
+receiver port, MSG, sender port
+4000,HELLO,6000
+This will sent to the Network Layer.
+
+______Network Layer		:: In the network layer It will attach the IP-address of the Particular Device to which data has to sent.
+receiver IP, recevier PORT, msg, sender Port, sender IP
+Receiver-IP,4000,HELLO,6000, Sender-IP
+
+_____Physical Layer		:: This layer will attch the MAC addrress to the ONLY THE SENDER MAC ADDRESS.
+MAC, receiver IP, recevier PORT, msg, sender Port, sender IP
+MAC, Receiver-IP,4000,HELLO,6000, Sender-IP
+THIS above address will accepted by all the PC in the Network and Later In the network layer The Particular RECEIVER-IP is CHECKED and if it Matches with the IP 
+then That Packet is received else it would be Discared.
+
+
+How will the Transport layer get to Know to which Layer it has to Tranfer the Data ??
+Ans:: Port NUmber.
+Every Process (Service) has it own Port Number.
+
+Transport Layer Helps to send DATA to Particluar SERVICE (with the help of PORT NUMBER).
