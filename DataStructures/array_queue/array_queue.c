@@ -1,38 +1,60 @@
 #include<stdio.h>
-//we can not enter the data until the array elements are pushed and completed poped, only then we can enter the elements in Circular manner
-int enqueue(int *queue,int max, int *rear,int *front,int data)
-{
-	if( *rear == *front) // == max-1)	//Circluar Queue.
-	{
-		*rear = 0;
-		*front = 0;
-		queue[(*rear)++]=data;	//if this is not written the Queue won't be Updated.
-	}
-	else if(*rear == max)
-	{
-	printf("Queue is FULL\n");	//return 1;
-	}
-	else
-		queue[(*rear)++]=data;	//adding the element and then incrementing the rear.
-}	//adding the element and then incrementing the rear.
+#include<stdlib.h>
+#include<array_queue.h>
 
-int dequeue(int *queue, int max,int *rear, int *front)
+int main()
 {
-	if (*rear == *front)
+
+	int rear=0,front=0,max;
+	int n,edata;
+	printf("Enter the array size\n");
+	scanf("%d",&max);
+	int queue[max];
+while(1)
+{
+	printf("Enter your choice\n1:Enqueue\n2:Dequeue\n3:Print list\n4:Exit\n");
+	scanf("%d",&n);
+
+	switch(n)
 	{
-		printf("Its Empty from Function\n");	
-		return 1;
+		case 1: printf("Enter the Data you want to Enqueue\n");
+			scanf("%d",&edata);
+			enqueue(queue,max,&rear,&front,edata);
+			break;			
+
+		case 2: dequeue(queue,max,&rear,&front);
+			break;	
+		
+		case 3: print(queue,rear,front);
+			break;
+
+		case 4: exit(1);
 	}
-	else
-		return queue[(*front)++];	//After Removing we will Increment the rear.
+ print(queue,rear,front);
+
 }
 
-void print(int *queue,int rear, int front) //pass by value.
-{
-	int i;
-	if( (front==rear))
-		printf("Queue is Empty\n");
-	for(i=front;i<rear;i++) //ex front=0 rear=max
-		printf("%d\t",queue[i]);
-	printf("\n");
 }
+	/*
+	   enqueue(queue,max,&rear,10);
+	   enqueue(queue,max,&rear,15);
+	   enqueue(queue,max,&rear,17);
+	   print(queue,rear,front);
+
+	   dequeue(queue,max,&rear,&front);
+	   print(queue,rear,front); 	//pass by value.
+
+	   enqueue(queue,max,&rear,19);
+	   enqueue(queue,max,&rear,22);
+	   print(queue,rear,front); 	//pass by value.
+
+	   dequeue(queue,max,&rear,&front);
+	   print(queue,rear,front); 	//pass by value.
+
+	   enqueue(queue,max,&rear,23);
+	   enqueue(queue,max,&rear,25);
+	   print(queue,rear,front); 	//pass by value.
+	   }
+
+
+	 */

@@ -1,0 +1,22 @@
+#main.out : slist_t_main.c slist.c
+# gcc slist_main.c slist.c -o slist.out
+
+CC := gcc
+SOURCE := $(wildcard *.c)
+TARGET := $(SOURCE:.c=.out)
+
+#include all the lib files like -lfun -lbitwise. all LIBRARY files are written.
+
+LFLAG = -L ../libraray/ -lslist_t -ldlist_t -larray_stack -larray_queue -lstack_ll -lqueue_ll -lbinary -lsorts -lbin_tree -lmerge_sll -lhashing -lproject -ldb -lhotel
+CFLAG = -I ../include
+
+#${TARGET} : ${SOURCE}
+
+all : $(TARGET)
+
+#below command will run like a loop.
+
+%.out : %.c 
+	${CC} $^ ${LFLAG} ${CFLAG} -o $@
+clean:
+	rm -f ${TARGET}

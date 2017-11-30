@@ -1,0 +1,14 @@
+#main.out : slist_t_main.c slist.c
+# gcc slist_main.c slist.c -o slist.out
+
+CC := gcc
+SOURCE := slist_t_main.c
+TARGET :=slist_copy.out
+
+LFLAG = -L ../libraray/ -lslist_t
+CFLAG = -I ../include
+
+${TARGET} : ${SOURCE}
+	${CC} $^ ${LFLAG} ${CFLAG} -o $@
+clean:
+	rm -f ${TARGET}
