@@ -1,0 +1,47 @@
+Shared Memory.
+It is created on the Kernel Space.
+
+---------------------------------------------------
+What all do we need to create a Shared Memory??
+	SHMGET
+1.We require a Key i.e to access the shared Memory. 	KEY :: can be specfied Manually.
+2.Maximum Size that we access from the Shared Memory.
+3.A flag IPC_CREAT and 0666(Permission) to Create a Shared Memory.
+In return It RETURNS the ID (not address) of the shared memory (1js11is042).
+Ex: shmid = shmget(key, SIZE(100), IPC_CREAT | 0666);
+shmget ( key , sizeof , flag (to create));
+
+If the shared memory is alredy created, It is to be matched the Key and Lets you access the same Shared Memory.
+
+----------------------------------------------------
+Now That we have an ID we need the address of the Shared Memory to access it.
+If there is a Procees ready to access that Shared Memory we do that with help of SHMAT.
+With help of ID we attach the Process With the Shared Memory and that will return the address.
+On success RETURNS the shared memory ADDRESS , on failure returns -1.
+
+	SHMAT
+What are the Parametrs of shmat??
+1.shmid == to specfiy which shared memory.
+2.shmaddr is NULL, the system chooses a suitable (unused) address at which to attach the segment(Shared Memory).
+3.shm_flag if the address match we need to spefiy the flag.
+Ex: shmaddr = shmat(shmid, addr(system does it), 0);
+ 
+Now in SHMAT We attach the calling Process to the Shared Memory.
+Returns the address (POINTER) to the Shared Memory.
+----------------------------------------------------
+
+Now that a Process is attached to a SHARED MEMORY, after the Process is Over, we need to detach that Process.
+Hence we make use of shmdt.
+We got an address when we attached a Process using shmat.
+
+NOw we need to detach that Process since the work is Over.
+Making use of the same address, we Detach the Process.
+
+	SHMDT
+We are just releving a Process from the Shared Memory.
+Ex: shmdt(shmaddr) //address (ptr , return value of shmat)
+The 1st Parameter is the address from the Previous Step where we attached the Process.
+----------------------------------------------------
+
+To delete the Shared Memory.
+	SHMCTL
