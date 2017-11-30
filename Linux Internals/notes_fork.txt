@@ -1,0 +1,10 @@
+FORK ::
+Fork is a System call which is used to Duplicate the Process.
+Fork ON SUCCESS Returns PID of the CHILD Process.  In Parent.
+Returns 0 . In Parent.
+-1 on Failure.
+
+EXECL :: 
+
+
+
