@@ -1,0 +1,18 @@
+------ Shared Memory Limits --------
+max number of segments = 4096  //so many times we can call shmget.
+max seg size (kbytes) = 4177919 //in 1 SM this the max size
+max total shared memory (kbytes) = 17112760316
+min seg size (bytes) = 1 //min size of SM.
+
+------ Semaphore Limits --------
+max number of arrays = 32000
+max semaphores per array = 32000	//in each array.
+max semaphores system wide = 1024000000
+max ops per semop call = 500	//like wait and post can wait im 1 semaphore and post in another semaphore.
+semaphore max value = 32767
+
+------ Messages Limits --------
+max queues system wide = 32000
+max size of message (bytes) = 8192
+default max size of queue (bytes) = 16384
+
